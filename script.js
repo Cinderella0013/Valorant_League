@@ -1,5 +1,5 @@
 // 1. วางลิงก์ CSV จาก Google Sheets ตรงนี้
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vGe5hs_gUvn6ZUV-nsJG0qj7JuLCSuBO3AaStxd9D84DYa123FO4Wl9ToWaRICSN04KRZVNlBh3Xvs/pub?gid=0&single=true&output=csv";
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGe5hs_gUvn6ZUV-nsJG0qj7JuLCSuBO3AaStxd9D84DYa123FO4Wl9ToWaRICSN04KRZVNlBh3Xvs/pub?gid=0&single=true&output=csv";
 
 // 2. ตั้งค่าคะแนน: ชนะ 1 ครั้งได้กี่แต้ม? (เช่น 1 หรือ 3)
 const POINTS_PER_WIN = 1; 
@@ -70,3 +70,4 @@ window.onload = () => {
     fetchData();
     setInterval(fetchData, 30000); // อัปเดตทุก 30 วินาที
 };
+
