@@ -2,7 +2,8 @@
 // CONFIGURATION
 // ==========================================
 const ADMIN_PASSWORD = "1234"; // รหัสผ่านแก้ไข
-const INITIAL_DATA = null;     // วาง JSON Export ที่นี่เพื่อให้คนอื่นเห็นข้อมูลเริ่มต้น
+const INITIAL_DATA = {"teams":[{"id":0,"name":"TEAM 01","group":"A","win":4,"loss":0,"pts":12,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=0"},{"id":1,"name":"TEAM 02","group":"A","win":1,"loss":0,"pts":3,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=1"},{"id":2,"name":"TEAM 03","group":"A","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=2"},{"id":3,"name":"TEAM 04","group":"A","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=3"},{"id":4,"name":"TEAM 05","group":"A","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=4"},{"id":5,"name":"TEAM 06","group":"A","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=5"},{"id":6,"name":"TEAM 07","group":"A","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=6"},{"id":7,"name":"TEAM 08","group":"A","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=7"},{"id":8,"name":"TEAM 09","group":"A","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=8"},{"id":9,"name":"TEAM 10","group":"B","win":1,"loss":0,"pts":3,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=9"},{"id":10,"name":"TEAM 11","group":"B","win":2,"loss":0,"pts":6,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=10"},{"id":11,"name":"TEAM 12","group":"B","win":1,"loss":0,"pts":3,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=11"},{"id":12,"name":"TEAM 13","group":"B","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=12"},{"id":13,"name":"TEAM 14","group":"B","win":1,"loss":0,"pts":3,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=13"},{"id":14,"name":"TEAM 15","group":"B","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=14"},{"id":15,"name":"TEAM 16","group":"B","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=15"},{"id":16,"name":"TEAM 17","group":"B","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=16"},{"id":17,"name":"TEAM 18","group":"B","win":0,"loss":0,"pts":0,"logo":"https://api.dicebear.com/7.x/identicon/svg?seed=17"}]};     
+// วาง JSON Export ที่นี่เพื่อให้คนอื่นเห็นข้อมูลเริ่มต้นconst INITIAL_DATA = null;
 
 // ==========================================
 // CORE LOGIC
@@ -135,4 +136,5 @@ function resetData() {
 window.onload = () => { 
     checkAdmin(); 
     saveAndRender(); 
+
 };
