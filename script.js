@@ -24,7 +24,7 @@ async function fetchData() {
                 name: cols[0] ? cols[0].replace(/"/g, '') : `TEAM ${i+1}`,
                 win: win,
                 loss: loss,
-                pts: win * 3, // ชนะได้ 3 แต้ม
+                pts: win * 1, // ชนะได้ 3 แต้ม
                 logo: cols[3] ? cols[3].trim() : `https://api.dicebear.com/7.x/identicon/svg?seed=${i}`,
                 group: cols[4] ? cols[4].trim().toUpperCase() : (i < 9 ? 'A' : 'B')
             };
@@ -66,4 +66,5 @@ function renderTables() {
 window.onload = () => {
     fetchData();
     setInterval(fetchData, 60000); 
+
 };
