@@ -1,5 +1,8 @@
-// วางลิงก์ CSV ที่ได้จากเมนู Publish to web ของ Google Sheets ตรงนี้
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGe5hs_gUvn6ZUV-nsJG0qj7JuLCSuBO3AaStxd9D84DYa123FO4Wl9ToWaRICSN04KRZVNlBh3Xvs/pub?gid=0&single=true&output=csv";
+// 1. วางลิงก์ CSV จาก Google Sheets ตรงนี้
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vGe5hs_gUvn6ZUV-nsJG0qj7JuLCSuBO3AaStxd9D84DYa123FO4Wl9ToWaRICSN04KRZVNlBh3Xvs/pub?gid=0&single=true&output=csv";
+
+// 2. ตั้งค่าคะแนน: ชนะ 1 ครั้งได้กี่แต้ม? (เช่น 1 หรือ 3)
+const POINTS_PER_WIN = 1; 
 
 let teams = [];
 
@@ -10,10 +13,9 @@ async function fetchData() {
         
         // แยกบรรทัดและล้างช่องว่าง
         const rows = csvText.split('\n').map(row => row.trim()).filter(row => row !== "");
-        const dataRows = rows.slice(1); // ข้ามหัวตาราง (Name, Win, Loss, Logo, Group)
+        const dataRows = rows.slice(1); // ข้ามหัวตาราง
 
         teams = dataRows.map((row, i) => {
-            // ใช้ regex เพื่อแยกคอมมาที่ไม่ได้อยู่ในเครื่องหมายคำพูด (เผื่อชื่อทีมมีคอมมา)
             const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
             
             const win = parseInt(cols[1]) || 0;
@@ -24,7 +26,8 @@ async function fetchData() {
                 name: cols[0] ? cols[0].replace(/"/g, '') : `TEAM ${i+1}`,
                 win: win,
                 loss: loss,
-                pts: win * 1, // ชนะได้ 3 แต้ม
+                // คำนวณ PTS ตามจำนวน win คูณด้วยคะแนนที่ตั้งไว้
+                pts: win * POINTS_PER_WIN, 
                 logo: cols[3] ? cols[3].trim() : `https://api.dicebear.com/7.x/identicon/svg?seed=${i}`,
                 group: cols[4] ? cols[4].trim().toUpperCase() : (i < 9 ? 'A' : 'B')
             };
@@ -41,7 +44,7 @@ function renderTables() {
         const tbody = document.getElementById(`table-${group.toLowerCase()}`);
         if(!tbody) return;
 
-        // กรองทีมตามกลุ่มและจัดลำดับ (แต้ม > จำนวนที่ชนะ > ชื่อ)
+        // จัดลำดับ: คะแนน (PTS) มากสุดขึ้นก่อน > ถ้าเท่ากันดูที่จำนวนชนะ (WIN)
         const groupTeams = teams.filter(t => t.group === group)
             .sort((a, b) => b.pts - a.pts || b.win - a.win || a.name.localeCompare(b.name));
         
@@ -54,17 +57,16 @@ function renderTables() {
                         <span class="font-bold uppercase">${t.name}</span>
                     </div>
                 </td>
-                <td class="text-center">${t.win}</td>
-                <td class="text-center">${t.loss}</td>
-                <td class="text-center text-[#ff4655] font-black text-lg">${t.pts}</td>
+                <td class="text-center font-semibold text-white">${t.win}</td>
+                <td class="text-center text-gray-400">${t.loss}</td>
+                <td class="text-center text-[#ff4655] font-black text-xl">${t.pts}</td>
             </tr>
         `).join('');
     });
 }
 
-// โหลดข้อมูลครั้งแรกและอัปเดตทุก 1 นาที
+// โหลดข้อมูลและตั้งเวลาอัปเดตอัตโนมัติ
 window.onload = () => {
     fetchData();
-    setInterval(fetchData, 60000); 
-
+    setInterval(fetchData, 30000); // อัปเดตทุก 30 วินาที
 };
